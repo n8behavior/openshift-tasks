@@ -1,19 +1,36 @@
 <?xml version="1.0"?>
 <settings>
-  <mirrors>
-    <mirror>
-      <id>Nexus</id>
-      <name>Nexus Public Mirror</name>
-      <url>http://nexus3-xyz-nexus.apps.na1.openshift.opentlc.com/repository/maven-all-public/</url>
-      <mirrorOf>*</mirrorOf>
-    </mirror>
-  </mirrors>
-  <servers>
-    <server>
-      <id>nexus</id>
-      <username>admin</username>
-      <password>admin123</password>
-    </server>
-  </servers>
+    <pluginGroups>
+	<pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+    </pluginGroups>
+    <profiles>
+	<profile>
+	    <id>sonar</id>
+	    <activation>
+		<activeByDefault>true</activeByDefault>
+	    </activation>
+	    <properties>
+		<!-- Optional URL to server. Default value is http://localhost:9000 -->
+		<sonar.host.url>
+		    http://sonarqube-mjs-cicd.apps.rdu.example.opentlc.com
+		</sonar.host.url>
+	    </properties>
+	</profile>
+    </profiles>
+    <mirrors>
+	<mirror>
+	    <id>Nexus</id>
+	    <name>Nexus Public Mirror</name>
+	    <url>http://nexus3-mjs-cicd.apps.rdu.example.opentlc.com/repository/maven-all-public/</url>
+	    <mirrorOf>*</mirrorOf>
+	</mirror>
+    </mirrors>
+    <servers>
+	<server>
+	    <id>nexus</id>
+	    <username>admin</username>
+	    <password>admin123</password>
+	</server>
+    </servers>
 </settings>
 
