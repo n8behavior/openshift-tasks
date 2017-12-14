@@ -35,7 +35,7 @@ node('maven') {
 
   // Using Maven call SonarQube for Code Analysis
   stage('Code Analysis') {
-    // TBD
+    sh "${mvnCmd} sonar:sonar -DskipTests"
   }
 
   // Publish the latest war file to Nexus. This needs to go into <nexusurl>/repository/releases.
