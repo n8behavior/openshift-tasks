@@ -77,7 +77,12 @@ node('maven') {
   // Make sure it is the one you just tagged in the previous step. You may need to patch the deployment configuration
   // of your application.
   stage('Deploy to Dev') {
-    // TBD
+    sh "oc project mjs-tasks-dev"
+    sh "oc patch dc tasks --patch '{\"spec\": { \"triggers\": [ { \"type\": \"ImageChange\", \"imageChangeParams\": { \"containerNames\": [ \"tasks\" ], \"from\": { \"kind\": \"ImageStreamTag\", \"namespace\": \"mjs-tasks-dev\", \"name\": \"tasks:TestingCandidate-$version\"}}}]}}' -n mjs-tasks-dev"
+
+    openshiftDeploy depCfg: 'tasks', namespace: 'mjs-tasks-dev', verbose: 'false', waitTime: '', waitUnit: 'sec'
+    openshiftVerifyDeployment depCfg: 'tasks', namespace: 'mjs-tasks-dev', replicaCount: '1', verbose: 'false', verifyReplicaCount: 'false', waitTime: '', waitUnit: 'sec'
+    openshiftVerifyService namespace: 'mjs-tasks-dev', svcName: 'tasks', verbose: 'false'
   }
 
   // Run some integration tests (see the openshift-tasks Github Repository README.md for ideas).
