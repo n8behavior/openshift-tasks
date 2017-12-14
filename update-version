@@ -1,4 +1,4 @@
 #!/bin/bash
 VERSION=$1
 sed -i "s/Fixed Version [0-9]\+\.[0-9]\+/Fixed Version $VERSION/" ./src/main/webapp/index.jsp
-mvn versions:set -f pom.xml -s nexus_settings.xml -DgenerateBackupPoms=false -DnewVersion=${VERSION}
+mvn versions:set -f pom.xml -s settings.xml -DgenerateBackupPoms=false -DnewVersion=${VERSION}
