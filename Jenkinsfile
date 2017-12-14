@@ -6,7 +6,7 @@ node('maven') {
   // Define Maven Command. Make sure it points to the correct settings for our
   // Nexus installation. The file nexus_openshift_settings.xml needs to be in the
   // Source Code repository.
-  def mvnCmd = "mvn -s ./nexus_openshift_settings.xml"
+  def mvnCmd = "mvn -s ./nexus_settings.xml"
 
   stage('Checkout Source') {
     // Get Source Code from SCM (Git) as configured in the Jenkins Project
