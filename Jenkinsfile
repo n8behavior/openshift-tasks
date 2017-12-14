@@ -30,7 +30,7 @@ node('maven') {
 
   // Using Maven run the unit tests
   stage('Unit Tests') {
-    // TBD
+    sh "${mvnCmd} test"
   }
 
   // Using Maven call SonarQube for Code Analysis
