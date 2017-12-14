@@ -61,11 +61,11 @@
     <distributionManagement>
         <repository>
             <id>nexus</id>
-            <url>http://nexus:8081/content/repositories/releases</url>
+            <url>http://nexus3-mjs-cicd.apps.rdu.example.opentlc.com/repository/releases</url>
         </repository>
         <snapshotRepository>
             <id>nexus</id>
-            <url>http://nexus:8081/content/repositories/snapshots</url>
+            <url>http://nexus3-mjs-cicd.apps.rdu.example.opentlc.com/repository/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -160,6 +160,38 @@
         <!-- Maven will append the version to the finalName (which is the name given to the generated war, and hence the context root) -->
         <finalName>openshift-tasks</finalName>
         <plugins>
+            <plugin>
+               <artifactId>maven-deploy-plugin</artifactId>
+               <version>2.8.1</version>
+               <executions>
+                  <execution>
+                     <id>default-deploy</id>
+                     <phase>deploy</phase>
+                     <goals>
+                        <goal>deploy</goal>
+                     </goals>
+                  </execution>
+               </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.sonatype.plugins</groupId>
+              <artifactId>nexus-staging-maven-plugin</artifactId>
+              <version>1.5.1</version>
+              <executions>
+                 <execution>
+                    <id>default-deploy</id>
+                    <phase>deploy</phase>
+                    <goals>
+                       <goal>deploy</goal>
+                    </goals>
+                 </execution>
+              </executions>
+              <configuration>
+                 <serverId>nexus</serverId>
+                 <nexusUrl>http://nexus3-mjs-cicd.apps.rdu.example.opentlc.com/</nexusUrl>
+                 <skipStaging>true</skipStaging>
+              </configuration>
+            </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>${version.war.plugin}</version>
