@@ -13,5 +13,9 @@ items:
       type: "JenkinsPipeline"
       jenkinsPipelineStrategy:
         jenkinsfilePath: Jenkinsfile
+    triggers:
+      - github:
+          secret: c2d81f3311a31fde
+        type: GitHub
 kind: List
 metadata: []
