@@ -25,7 +25,7 @@ node('maven') {
   // Using Maven build the war file
   // Do not run tests in this step
   stage('Build war') {
-    // TBD
+    sh "${mvnCmd} clean package -DskipTests"
   }
 
   // Using Maven run the unit tests
